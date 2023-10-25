@@ -10,8 +10,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name ="Home" component={ Home }/>
-        <Stack.Screen name ="CreateChangeList" component={ CreateChangeList }/>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="CreateChangeList" component={CreateChangeList} />
       </Stack.Navigator>
     </NavigationContainer>
   );
