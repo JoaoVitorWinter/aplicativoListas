@@ -7,7 +7,7 @@ import Input from "../Components/Input";
 export default function CreateChangeScreen({ route, navigation }) {
     const { action, lists } = route.params;
     const [name, setName] = useState("");
-
+    console.log(lists);
     const handleClick = () => {
         if (action == "Criar") {
             criarLista();
@@ -19,16 +19,14 @@ export default function CreateChangeScreen({ route, navigation }) {
             listsChange: action == "Criar" ? criarLista() : ""
         });
     }
-    console.log(route.params)
+
     const criarLista = () => {
-        var listsVariable  = lists;
+        var listsVariable  = lists.lists;
         console.log(listsVariable)
-        listsVariable = [listsVariable, name];
+        listsVariable = [...listsVariable, name];
         return listsVariable
     }
 
-    console.log(name);
-    console.log(lists);
     return (
         <View style={styles.container}>
             <Input placeholder={"Nome da lista"} onChangeText={setName}/>
