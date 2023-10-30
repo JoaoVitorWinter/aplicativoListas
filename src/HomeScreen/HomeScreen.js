@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import Button from '../Components/Button'
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ route, navigation }) {
+    const { listsChange } = route.params;
+    const [lists, setLists] = useState([""]);
+    console.log(listsChange);
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Ultimate List</Text>
             <Button
                 onPress={() => {
                     navigation.navigate("CreateChangeList", {
-                        action: "Criar"
+                        action: "Criar",
+                        lists: {lists}
                     });
                 }}
                 text={"Adicionar lista"} />
