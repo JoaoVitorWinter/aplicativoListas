@@ -1,36 +1,64 @@
 import { useState, useEffect, useMemo } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 import { useIsFocused } from "@react-navigation/native";
 
 import Button from '../Components/Button'
+import List from "../Components/List";
 
 export default function HomeScreen({ route, navigation }) {
     const { listsChange } = route.params;
     const focus = useIsFocused();
-    const [lists, setLists] = useState([""]);
+    const [lists, setLists] = useState(new Array());
 
     useEffect(() => {
         setLists(listsChange);
     }, [focus])
 
     const listsDisplay = useMemo(() => {
-        return(
+        return (
             <View>
-                    {
-                        lists.map((item, index) => {
-                            return (
-                                <View key={"" + item + index}>
-                                    <Text>{item}</Text>
+                {
+                    lists.map((item, index) => {
+                        return (
+                            <View style={styles.list} key={"" + item + index}>
+                                <Text>{item}</Text>
+                                <Text>30 08 2005</Text>
+                                <View style={{flexDirection: "row", gap: 10}}>
+                                    <Pressable onPress={() => {
+                                        navigation.navigate("CreateChangeList", {
+                                            action: "Editar"
+                                        })
+                                    }}>
+                                        <Text>
+                                            Editar
+                                        </Text>
+                                    </Pressable>
+                                    <Pressable onPress={() => { removeList(index) }}>
+                                        <Text>
+                                            X
+                                        </Text>
+                                    </Pressable>
                                 </View>
-                            )
-                        })
-                    }
+                                {/* <List
+                                    name={item}
+                                    date={() => { (new Date()).toString() }}
+                                    navigation={navigation}
+                                    removeList={removeList}
+                                    index={index} /> */}
+                            </View>
+                        )
+                    })
+                }
             </View>
         )
-    });
+    }, [lists]);
 
-    console.log(listsChange);
+    const removeList = (index) => {
+        var newLists = [...lists];
+        newLists.splice(index, 1);
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Ultimate List</Text>
@@ -38,7 +66,7 @@ export default function HomeScreen({ route, navigation }) {
                 onPress={() => {
                     navigation.navigate("CreateChangeList", {
                         action: "Criar",
-                        lists: { lists }
+                        lists: lists
                     });
                 }}
                 text={"Adicionar lista"} />
@@ -57,5 +85,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         textAlign: "center",
+    },
+    list: {
+        flexDirection: "row",
+        width: "90%",
+        justifyContent: "space-evenly",
+        borderColor: "black",
+        borderWidth: 1,
+        padding: 8
     }
+
 });

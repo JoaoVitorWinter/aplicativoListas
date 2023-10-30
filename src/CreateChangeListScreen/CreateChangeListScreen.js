@@ -7,24 +7,17 @@ import Input from "../Components/Input";
 export default function CreateChangeScreen({ route, navigation }) {
     const { action, lists } = route.params;
     const [name, setName] = useState("");
-    console.log(lists);
+
     const handleClick = () => {
-        if (action == "Criar") {
-            criarLista();
-        } else {
-
-        }
-
         navigation.navigate("Home", {
             listsChange: action == "Criar" ? criarLista() : ""
         });
     }
 
     const criarLista = () => {
-        var listsVariable  = lists.lists;
-        console.log(listsVariable)
+        var listsVariable = lists;
         listsVariable = [...listsVariable, name];
-        return listsVariable
+        return listsVariable;
     }
 
     return (

@@ -1,20 +1,18 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text } from "react-native";
+
+import Button from '../Button';
 
 export default function List(props) {
     return (
         <View>
             <Text>{props.name}</Text>
             <Text>{props.date}</Text>
-            <Pressable>
-                <Text>
-                    Editar
-                </Text>
-            </Pressable>
-            <Pressable>
-                <Text>
-                    X
-                </Text>
-            </Pressable>
+            <Button text={"Editar"} onPress={() => {props.navigation.navigate("CreateChangeList", {
+                action: "Editar"
+            })}} />
+            <Button text={"X"} onPress={() => {
+                props.removeList(props.index);
+            }}/>
 
         </View>
     )
