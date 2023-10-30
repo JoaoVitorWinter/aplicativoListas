@@ -14,20 +14,23 @@ export default function HomeScreen({ route, navigation }) {
     useEffect(() => {
         setLists(listsChange);
     }, [focus])
+    console.log(lists)
 
     const listsDisplay = useMemo(() => {
         return (
-            <View>
+            <View style={{width: "100%", alignItems: "center", gap: 8}}>
                 {
                     lists.map((item, index) => {
                         return (
                             <View style={styles.list} key={"" + item + index}>
-                                <Text>{item}</Text>
-                                <Text>30 08 2005</Text>
+                                <Text style={{width: 50}}>{item[0]}</Text>
+                                <Text>{item[1]}</Text>
                                 <View style={{flexDirection: "row", gap: 10}}>
                                     <Pressable onPress={() => {
                                         navigation.navigate("CreateChangeList", {
-                                            action: "Editar"
+                                            action: "Editar",
+                                            lists: lists,
+                                            listIndex: index
                                         })
                                     }}>
                                         <Text>
@@ -57,6 +60,7 @@ export default function HomeScreen({ route, navigation }) {
     const removeList = (index) => {
         var newLists = [...lists];
         newLists.splice(index, 1);
+        setLists(newLists);
     }
 
     return (
@@ -66,7 +70,7 @@ export default function HomeScreen({ route, navigation }) {
                 onPress={() => {
                     navigation.navigate("CreateChangeList", {
                         action: "Criar",
-                        lists: lists
+                        lists: lists,
                     });
                 }}
                 text={"Adicionar lista"} />
@@ -80,18 +84,21 @@ export default function HomeScreen({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         gap: 16,
-        marginTop: 24
+        marginTop: 24,
     },
     title: {
         fontSize: 30,
         textAlign: "center",
     },
     list: {
+        backgroundColor: "aqua",
         flexDirection: "row",
-        width: "90%",
-        justifyContent: "space-evenly",
+        width: 350,
+        justifyContent: "space-between",
+        alignItems: "center",
         borderColor: "black",
         borderWidth: 1,
+        borderRadius: 8,
         padding: 8
     }
 

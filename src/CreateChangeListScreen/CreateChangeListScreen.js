@@ -5,18 +5,28 @@ import Button from "../Components/Button";
 import Input from "../Components/Input";
 
 export default function CreateChangeScreen({ route, navigation }) {
-    const { action, lists } = route.params;
+    const { action, lists, listIndex } = route.params;
     const [name, setName] = useState("");
 
     const handleClick = () => {
+        if (name == "") {
+            return alert("Coloque um valor no input!")
+        }
         navigation.navigate("Home", {
-            listsChange: action == "Criar" ? criarLista() : ""
+            listsChange: action == "Criar" ? criarLista() : editarLista()
         });
     }
 
     const criarLista = () => {
         var listsVariable = lists;
-        listsVariable = [...listsVariable, name];
+        listsVariable = [...listsVariable, [name, (new Date().toLocaleString()), []]];
+        return listsVariable;
+    }
+
+    const editarLista = () => {
+        var listsVariable = lists;
+        var listItems = listsVariable[listIndex][2];
+        listsVariable.splice(listIndex, 1, [name, (new Date().toLocaleString()), listItems])
         return listsVariable;
     }
 
