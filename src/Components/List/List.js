@@ -8,7 +8,9 @@ export default function List(props) {
             <Text>{props.name}</Text>
             <Text>{props.date}</Text>
             <Button text={"Editar"} onPress={() => {props.navigation.navigate("CreateChangeList", {
-                action: "Editar"
+                action: "Editar",
+                lists: props.lists,
+                listIndex: props.index
             })}} />
             <Button text={"X"} onPress={() => {
                 props.removeList(props.index);

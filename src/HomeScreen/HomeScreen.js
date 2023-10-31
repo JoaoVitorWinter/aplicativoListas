@@ -31,34 +31,37 @@ export default function HomeScreen({ route, navigation }) {
                 {
                     lists.map((item, index) => {
                         return (
-                            <View style={styles.list} key={"" + item + index}>
-                                <Text style={{ width: 50 }}>{item[0]}</Text>
-                                <Text>{item[1]}</Text>
-                                <View style={{ flexDirection: "row", gap: 10 }}>
-                                    <Pressable onPress={() => {
-                                        navigation.navigate("CreateChangeList", {
-                                            action: "Editar",
-                                            lists: lists,
-                                            listIndex: index
-                                        })
-                                    }}>
-                                        <Text>
-                                            Editar
-                                        </Text>
-                                    </Pressable>
-                                    <Pressable onPress={() => { removeList(index) }}>
-                                        <Text>
-                                            X
-                                        </Text>
-                                    </Pressable>
-                                </View>
-                                {/* <List
-                                    name={item}
-                                    date={() => { (new Date()).toString() }}
-                                    navigation={navigation}
-                                    removeList={removeList}
-                                    index={index} /> */}
-                            </View>
+                            // <View style={styles.list} key={"" + item + index}>
+                            //     <Text style={{ width: 50 }}>{item[0]}</Text>
+                            //     <Text>{item[1]}</Text>
+                            //     <View style={{ flexDirection: "row", gap: 10 }}>
+                            //         <Pressable onPress={() => {
+                            //             navigation.navigate("CreateChangeList", {
+                            //                 action: "Editar",
+                            //                 lists: lists,
+                            //                 listIndex: index
+                            //             })
+                            //         }}>
+                            //             <Text>
+                            //                 Editar
+                            //             </Text>
+                            //         </Pressable>
+                            //         <Pressable onPress={() => { removeList(index) }}>
+                            //             <Text>
+                            //                 X
+                            //             </Text>
+                            //         </Pressable>
+                            //     </View>
+                            // </View>
+
+                            <List
+                                key={"" + item + index}
+                                name={item[0]}
+                                date={item[1]}
+                                navigation={navigation}
+                                removeList={removeList}
+                                index={index}
+                                lists={lists} />
                         )
                     })
                 }
