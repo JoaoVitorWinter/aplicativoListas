@@ -13,7 +13,6 @@ export default function List(props) {
             <Button text={"X"} onPress={() => {
                 props.removeList(props.index);
             }}/>
-
         </View>
     )
 }

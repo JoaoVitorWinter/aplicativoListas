@@ -26,7 +26,8 @@ export default function CreateChangeScreen({ route, navigation }) {
     const editarLista = () => {
         var listsVariable = lists;
         var listItems = listsVariable[listIndex][2];
-        listsVariable.splice(listIndex, 1, [name, (new Date().toLocaleString()), listItems])
+        listsVariable.splice(listIndex, 1, [name, (new Date().toLocaleString()), listItems]);
+        listsVariable = [...listsVariable];
         return listsVariable;
     }
 

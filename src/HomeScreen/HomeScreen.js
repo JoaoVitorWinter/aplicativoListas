@@ -12,9 +12,10 @@ export default function HomeScreen({ route, navigation }) {
     const [lists, setLists] = useState(new Array());
 
     useEffect(() => {
-        setLists(listsChange);
-    }, [focus])
-    console.log(lists)
+        if (lists != listsChange) {
+            setLists(listsChange);
+        }
+    }, [focus]);
 
     const listsDisplay = useMemo(() => {
         return (
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 1,
         borderRadius: 8,
-        padding: 8
+        padding: 8,
     }
 
 });
