@@ -4,6 +4,7 @@ import AsyncStorage  from "@react-native-async-storage/async-storage";
 
 import Home from './src/HomeScreen';
 import CreateChangeList from './src/CreateChangeListScreen'
+import List from './src/ListScreen'
 import metadata from './src/storage.metadata.json';
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ export default function App() {
           listsChange: new Array()
         }}/>
         <Stack.Screen name="CreateChangeList" component={CreateChangeList} />
+        <Stack.Screen name="List" component={List} />
       </Stack.Navigator>
     </NavigationContainer>
   );

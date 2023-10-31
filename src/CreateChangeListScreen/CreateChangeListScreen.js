@@ -19,7 +19,7 @@ export default function CreateChangeScreen({ route, navigation }) {
 
     const criarLista = () => {
         var listsVariable = lists;
-        listsVariable = [...listsVariable, [name, (new Date().toLocaleString()), []]];
+        listsVariable = [[name, (new Date().toLocaleString()), []], ...listsVariable];
         return listsVariable;
     }
 

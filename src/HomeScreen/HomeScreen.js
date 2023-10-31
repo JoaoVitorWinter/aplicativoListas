@@ -55,13 +55,13 @@ export default function HomeScreen({ route, navigation }) {
                             // </View>
 
                             <List
-                                key={"" + item + index}
+                                key={"" + item + index  }
                                 name={item[0]}
                                 date={item[1]}
                                 navigation={navigation}
-                                removeList={removeList}
                                 index={index}
-                                lists={lists} />
+                                lists={lists}
+                                setLists={setLists} />
                         )
                     })
                 }
@@ -81,12 +81,6 @@ export default function HomeScreen({ route, navigation }) {
         if (getList) {
             setLists(JSON.parse(getList));
         }
-    }
-
-    const removeList = (index) => {
-        var newLists = [...lists];
-        newLists.splice(index, 1);
-        setLists(newLists);
     }
 
     return (
@@ -115,17 +109,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         textAlign: "center",
-    },
-    list: {
-        backgroundColor: "aqua",
-        flexDirection: "row",
-        width: 350,
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderColor: "black",
-        borderWidth: 1,
-        borderRadius: 8,
-        padding: 8,
     }
 
 });
