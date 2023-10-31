@@ -1,11 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AsyncStorage  from "@react-native-async-storage/async-storage";
 
 import Home from './src/HomeScreen';
 import CreateChangeList from './src/CreateChangeListScreen'
 import List from './src/ListScreen'
-import metadata from './src/storage.metadata.json';
+import CreateChangeItem from './src/CreateChangeItemScreen/CreateChangeItem';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +17,7 @@ export default function App() {
         }}/>
         <Stack.Screen name="CreateChangeList" component={CreateChangeList} />
         <Stack.Screen name="List" component={List} />
+        <Stack.Screen name="CreateChangeItem" component={CreateChangeItem} />
       </Stack.Navigator>
     </NavigationContainer>
   );

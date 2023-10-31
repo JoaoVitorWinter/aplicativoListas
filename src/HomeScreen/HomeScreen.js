@@ -104,11 +104,11 @@ export default function HomeScreen({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         gap: 16,
-        marginTop: 24,
+        marginTop: 24
     },
     title: {
         fontSize: 30,
-        textAlign: "center",
+        textAlign: "center"
     }
 
 });
