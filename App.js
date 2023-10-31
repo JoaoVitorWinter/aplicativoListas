@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/HomeScreen';
 import CreateChangeList from './src/CreateChangeListScreen'
 import List from './src/ListScreen'
-import CreateChangeItem from './src/CreateChangeItemScreen/CreateChangeItem';
+import CreateChangeItem from './src/CreateChangeItemScreen';
 
 const Stack = createNativeStackNavigator();
 

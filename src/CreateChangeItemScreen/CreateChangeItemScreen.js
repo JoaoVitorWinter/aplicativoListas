@@ -4,26 +4,27 @@ import { StyleSheet, View } from "react-native";
 import Button from "../Components/Button";
 import Input from "../Components/Input";
 
-export default function CreateChangeScreen({ route, navigation }) {
+export default function CreateChangeItemScreen({ route, navigation }) {
     const { action, lists, listIndex } = route.params;
     const [name, setName] = useState("");
-
+    
     const handleClick = () => {
         if (name == "") {
             return alert("Coloque um valor no input!")
         }
-        navigation.navigate("Home", {
-            listsChange: action == "Criar" ? criarLista() : editarLista()
+        navigation.navigate("List", {
+            list: action == "Criar" ? criarItem() : editarItem(),
+            listIndex: listIndex
         });
     }
 
-    const criarLista = () => {
+    const criarItem = () => {
         var listsVariable = lists;
-        listsVariable = [[name, (new Date().toLocaleString()), []], ...listsVariable];
+        listsVariable = [[listsVariable[listIndex][0], (new Date().toLocaleString()), [[name, (new Date().toLocaleString())], ...listsVariable[listIndex][2]]], ...listsVariable];
         return listsVariable;
     }
 
-    const editarLista = () => {
+    const editarItem = () => {
         var listsVariable = lists;
         var listItems = listsVariable[listIndex][2];
         listsVariable.splice(listIndex, 1);
@@ -34,8 +35,8 @@ export default function CreateChangeScreen({ route, navigation }) {
 
     return (
         <View style={styles.container}>
-            <Input placeholder={"Nome da lista"} onChangeText={setName}/>
-            <Button text={action + " lista"} onPress={handleClick} />
+            <Input placeholder={"Nome do item"} onChangeText={setName} />
+            <Button text={action + " item"} onPress={handleClick} />
         </View>
     );
 }

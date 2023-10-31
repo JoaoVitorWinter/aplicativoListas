@@ -18,7 +18,7 @@ export default function HomeScreen({ route, navigation }) {
     }, []);
 
     useEffect(() => {
-        setLists(listsChange);
+        setLists(listsChange || getLists());
     }, [focus]);
 
     useEffect(() => {
@@ -31,29 +31,6 @@ export default function HomeScreen({ route, navigation }) {
                 {
                     lists.map((item, index) => {
                         return (
-                            // <View style={styles.list} key={"" + item + index}>
-                            //     <Text style={{ width: 50 }}>{item[0]}</Text>
-                            //     <Text>{item[1]}</Text>
-                            //     <View style={{ flexDirection: "row", gap: 10 }}>
-                            //         <Pressable onPress={() => {
-                            //             navigation.navigate("CreateChangeList", {
-                            //                 action: "Editar",
-                            //                 lists: lists,
-                            //                 listIndex: index
-                            //             })
-                            //         }}>
-                            //             <Text>
-                            //                 Editar
-                            //             </Text>
-                            //         </Pressable>
-                            //         <Pressable onPress={() => { removeList(index) }}>
-                            //             <Text>
-                            //                 X
-                            //             </Text>
-                            //         </Pressable>
-                            //     </View>
-                            // </View>
-
                             <List
                                 key={"" + item + index  }
                                 name={item[0]}
