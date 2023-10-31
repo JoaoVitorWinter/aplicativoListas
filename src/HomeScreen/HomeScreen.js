@@ -2,9 +2,11 @@ import { useState, useEffect, useMemo } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
 import { useIsFocused } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Button from '../Components/Button'
 import List from "../Components/List";
+import metadata from '../storage.metadata.json';
 
 export default function HomeScreen({ route, navigation }) {
     const { listsChange } = route.params;
@@ -12,21 +14,27 @@ export default function HomeScreen({ route, navigation }) {
     const [lists, setLists] = useState(new Array());
 
     useEffect(() => {
-        if (lists != listsChange) {
-            setLists(listsChange);
-        }
+        getLists();
+    }, []);
+
+    useEffect(() => {
+        setLists(listsChange);
     }, [focus]);
+
+    useEffect(() => {
+        saveLists();
+    }, [lists]);
 
     const listsDisplay = useMemo(() => {
         return (
-            <View style={{width: "100%", alignItems: "center", gap: 8}}>
+            <View style={{ width: "100%", alignItems: "center", gap: 8 }}>
                 {
                     lists.map((item, index) => {
                         return (
                             <View style={styles.list} key={"" + item + index}>
-                                <Text style={{width: 50}}>{item[0]}</Text>
+                                <Text style={{ width: 50 }}>{item[0]}</Text>
                                 <Text>{item[1]}</Text>
-                                <View style={{flexDirection: "row", gap: 10}}>
+                                <View style={{ flexDirection: "row", gap: 10 }}>
                                     <Pressable onPress={() => {
                                         navigation.navigate("CreateChangeList", {
                                             action: "Editar",
@@ -57,6 +65,20 @@ export default function HomeScreen({ route, navigation }) {
             </View>
         )
     }, [lists]);
+
+
+    const saveLists = async () => {
+        const saveList = lists || "";
+        await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
+    }
+
+    const getLists = async () => {
+        const getList = await AsyncStorage.getItem(metadata.LISTS);
+
+        if (getList) {
+            setLists(JSON.parse(getList));
+        }
+    }
 
     const removeList = (index) => {
         var newLists = [...lists];
