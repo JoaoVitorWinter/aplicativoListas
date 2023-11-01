@@ -12,7 +12,6 @@ export default function ListScreen({ route, navigation }) {
     const { list, listIndex } = route.params;
     const focus = useIsFocused();
     const [useList, setUseList] = useState(["", "", new Array()]);
-
     useEffect(() => {
         getList();
     }, [focus]);
@@ -20,7 +19,9 @@ export default function ListScreen({ route, navigation }) {
     const removeItem = (index) => {
         var newLists = [...list];
         newLists.splice(listIndex, 1);
-        newLists.unshift([useList[0], (new Date().toLocaleString()), [[...useList[2]].splice(index, 1)]])
+        console.log([...useList[2]].splice(index, 1))
+        newLists.unshift([useList[0], (new Date().toLocaleString()), [...useList[2]].splice(index, 1)])
+        console.log(newLists)
         saveLists(newLists);
         setUseList(newLists[0]);
     }
@@ -42,7 +43,6 @@ export default function ListScreen({ route, navigation }) {
                                 lists={list}
                                 setUseList={setUseList} 
                                 removeItem = {removeItem}
-                            // setLists={setLists}
                             />
                         )
                     })
