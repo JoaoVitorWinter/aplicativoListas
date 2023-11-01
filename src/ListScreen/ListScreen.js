@@ -14,7 +14,7 @@ export default function ListScreen({ route, navigation }) {
     const [useList, setUseList] = useState(new Array());
 
     useEffect(() => {
-        getList
+        getList();
     }, [focus])
     const itemsDisplay = useMemo(() => {
         return (
@@ -40,13 +40,14 @@ export default function ListScreen({ route, navigation }) {
                 }
             </View>
         )
-    }, [list]);
+    }, [useList]);
 
     const removeItem = (index) => {
         var newLists = [...list];
         newLists.splice(listIndex, 1);
         newLists.unshift([useList[0], (new Date().toLocaleString()), [...useList[2].splice(index, 1)]])
         saveLists(newLists);
+        setUseList(newLists[0]);
     }
 
     const saveLists = async (lists) => {
@@ -54,10 +55,10 @@ export default function ListScreen({ route, navigation }) {
         await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
     }
 
-    const getLists = async () => {
+    const getList = async () => {
         const getList = await AsyncStorage.getItem(metadata.LISTS);
         if (getList) {
-            setUseList(JSON.parse(getList[listIndex]));
+            setUseList(JSON.parse(getList)[listIndex]);
         }
     }
 
