@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
 export default function Item(props) {
-    const removeList = (index) => {
+    const removeItem = (index) => {
         var newList = [...props.list];
-        newList.splice(index, 1);
+        newList[2].splice(index, 1);
         console.log(newList)
         // props.setLists(newLists);
         props.list = newList;
@@ -32,7 +32,7 @@ export default function Item(props) {
                         </Text>
                     </Pressable>
                     <Pressable onPress={() => {
-                        removeList(props.index);
+                        removeItem(props.index);
                     }}>
                         <Text>
                             X

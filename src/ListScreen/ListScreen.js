@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 import { useIsFocused } from "@react-navigation/native";
@@ -11,10 +11,7 @@ import metadata from '../storage.metadata.json';
 export default function ListScreen({ route, navigation }) {
     const { list, listIndex } = route.params;
     const focus = useIsFocused();
-
-    useEffect(() => {
-        saveLists(list);
-    }, [focus]);
+    const [useList, setUseList] = useState(new Array());
 
     const itemsDisplay = useMemo(() => {
         return (
@@ -30,6 +27,7 @@ export default function ListScreen({ route, navigation }) {
                                 index={index}
                                 list={list[listIndex]}
                                 lists={list}
+                                setUseList={setUseList}
                             // setLists={setLists}
                             />
                         )
@@ -38,11 +36,6 @@ export default function ListScreen({ route, navigation }) {
             </View>
         )
     }, [list]);
-
-    const saveLists = async () => {
-        const saveList = list || "";
-        await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
-    }
 
     return (
         <View style={styles.container}>
