@@ -17,6 +17,14 @@ export default function ListScreen({ route, navigation }) {
         getList();
     }, [focus]);
 
+    const removeItem = (index) => {
+        var newLists = [...list];
+        newLists.splice(listIndex, 1);
+        newLists.unshift([useList[0], (new Date().toLocaleString()), [[...useList[2]].splice(index, 1)]])
+        saveLists(newLists);
+        setUseList(newLists[0]);
+    }
+
     const itemsDisplay = useMemo(() => {
         return (
             <View style={{ width: "100%", alignItems: "center", gap: 8 }}>
@@ -32,8 +40,8 @@ export default function ListScreen({ route, navigation }) {
                                 index={index}
                                 list={list[listIndex]}
                                 lists={list}
-                                setUseList={setUseList}
-                                removeItem={removeItem}
+                                setUseList={setUseList} 
+                                removeItem = {removeItem}
                             // setLists={setLists}
                             />
                         )
@@ -42,14 +50,6 @@ export default function ListScreen({ route, navigation }) {
             </View>
         )
     }, [useList]);
-
-    const removeItem = (index) => {
-        var newLists = [...list];
-        newLists.splice(listIndex, 1);
-        newLists.unshift([useList[0], (new Date().toLocaleString()), [[...useList[2]].splice(index, 1)]])
-        saveLists(newLists);
-        setUseList(newLists[0]);
-    }
 
     const saveLists = async (lists) => {
         const saveList = lists || "";
