@@ -13,6 +13,9 @@ export default function ListScreen({ route, navigation }) {
     const focus = useIsFocused();
     const [useList, setUseList] = useState(new Array());
 
+    useEffect(() => {
+        getList
+    }, [focus])
     const itemsDisplay = useMemo(() => {
         return (
             <View style={{ width: "100%", alignItems: "center", gap: 8 }}>
@@ -24,10 +27,12 @@ export default function ListScreen({ route, navigation }) {
                                 name={item[0]}
                                 date={item[1]}
                                 navigation={navigation}
+                                listIndex={listIndex}
                                 index={index}
                                 list={list[listIndex]}
                                 lists={list}
                                 setUseList={setUseList}
+                                removeItem={removeItem}
                             // setLists={setLists}
                             />
                         )
@@ -36,6 +41,25 @@ export default function ListScreen({ route, navigation }) {
             </View>
         )
     }, [list]);
+
+    const removeItem = (index) => {
+        var newLists = [...list];
+        newLists.splice(listIndex, 1);
+        newLists.unshift([useList[0], (new Date().toLocaleString()), [...useList[2].splice(index, 1)]])
+        saveLists(newLists);
+    }
+
+    const saveLists = async (lists) => {
+        const saveList = lists || "";
+        await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
+    }
+
+    const getLists = async () => {
+        const getList = await AsyncStorage.getItem(metadata.LISTS);
+        if (getList) {
+            setUseList(JSON.parse(getList[listIndex]));
+        }
+    }
 
     return (
         <View style={styles.container}>

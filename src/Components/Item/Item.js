@@ -1,14 +1,6 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
 export default function Item(props) {
-    const removeItem = (index) => {
-        var newList = [...props.list];
-        newList[2].splice(index, 1);
-        console.log(newList)
-        // props.setLists(newLists);
-        props.list = newList;
-    }
-
     return (
         <View>
             <Text>{props.date}</Text>
@@ -24,7 +16,9 @@ export default function Item(props) {
                         props.navigation.navigate("CreateChangeList", {
                             action: "Editar",
                             lists: props.lists,
-                            listIndex: props.index
+                            listIndex: props.listIndex,
+                            itemIndex: props.index
+
                         })
                     }}>
                         <Text>
@@ -32,7 +26,7 @@ export default function Item(props) {
                         </Text>
                     </Pressable>
                     <Pressable onPress={() => {
-                        removeItem(props.index);
+                        props.removeItem(props.index);
                     }}>
                         <Text>
                             X
