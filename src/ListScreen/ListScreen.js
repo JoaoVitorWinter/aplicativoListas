@@ -11,16 +11,17 @@ import metadata from '../storage.metadata.json';
 export default function ListScreen({ route, navigation }) {
     const { list, listIndex } = route.params;
     const focus = useIsFocused();
-    const [useList, setUseList] = useState(new Array());
+    const [useList, setUseList] = useState(["", "", new Array()]);
 
     useEffect(() => {
         getList();
-    }, [focus])
+    }, [focus]);
+
     const itemsDisplay = useMemo(() => {
         return (
             <View style={{ width: "100%", alignItems: "center", gap: 8 }}>
                 {
-                    list[listIndex][2].map((item, index) => {
+                    useList[2].map((item, index) => {
                         return (
                             <Item
                                 key={"" + item + index}
@@ -45,7 +46,7 @@ export default function ListScreen({ route, navigation }) {
     const removeItem = (index) => {
         var newLists = [...list];
         newLists.splice(listIndex, 1);
-        newLists.unshift([useList[0], (new Date().toLocaleString()), [...useList[2].splice(index, 1)]])
+        newLists.unshift([useList[0], (new Date().toLocaleString()), [[...useList[2]].splice(index, 1)]])
         saveLists(newLists);
         setUseList(newLists[0]);
     }
@@ -58,13 +59,14 @@ export default function ListScreen({ route, navigation }) {
     const getList = async () => {
         const getList = await AsyncStorage.getItem(metadata.LISTS);
         if (getList) {
+            console.log(JSON.parse(getList)[listIndex])
             setUseList(JSON.parse(getList)[listIndex]);
         }
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{list[listIndex][0]}</Text>
+            <Text style={styles.title}>{useList[0]}</Text>
             <Button text={"Adicionar item"} onPress={() => {
                 navigation.navigate("CreateChangeItem", {
                     action: "Criar",

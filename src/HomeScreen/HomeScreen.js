@@ -11,7 +11,6 @@ import metadata from '../storage.metadata.json';
 export default function HomeScreen({ route, navigation }) {
     const focus = useIsFocused();
     const [lists, setLists] = useState(new Array());
-    
     useEffect(() => {
         getLists();
     }, [focus]);

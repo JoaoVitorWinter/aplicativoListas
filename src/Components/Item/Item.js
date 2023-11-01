@@ -26,7 +26,7 @@ export default function Item(props) {
                         </Text>
                     </Pressable>
                     <Pressable onPress={() => {
-                        props.removeItem(props.index);
+                        props.removeItem("" + props.index);
                     }}>
                         <Text>
                             X
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     list: {
         backgroundColor: "aqua",
         flexDirection: "row",
-        // flexWrap: "wrap",
         width: 350,
         justifyContent: "space-between",
         alignItems: "center",
