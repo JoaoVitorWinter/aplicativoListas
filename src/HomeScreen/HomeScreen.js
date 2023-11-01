@@ -9,16 +9,11 @@ import List from "../Components/List";
 import metadata from '../storage.metadata.json';
 
 export default function HomeScreen({ route, navigation }) {
-    const { listsChange } = route.params;
     const focus = useIsFocused();
     const [lists, setLists] = useState(new Array());
 
     useEffect(() => {
         getLists();
-    }, []);
-
-    useEffect(() => {
-        setLists(listsChange || getLists());
     }, [focus]);
 
     useEffect(() => {
@@ -32,7 +27,7 @@ export default function HomeScreen({ route, navigation }) {
                     lists.map((item, index) => {
                         return (
                             <List
-                                key={"" + item + index  }
+                                key={"" + item + index}
                                 name={item[0]}
                                 date={item[1]}
                                 navigation={navigation}
@@ -54,7 +49,6 @@ export default function HomeScreen({ route, navigation }) {
 
     const getLists = async () => {
         const getList = await AsyncStorage.getItem(metadata.LISTS);
-
         if (getList) {
             setLists(JSON.parse(getList));
         }

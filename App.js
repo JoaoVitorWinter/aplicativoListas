@@ -12,9 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} initialParams={{
-          listsChange: new Array()
-        }}/>
+        <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="CreateChangeList" component={CreateChangeList} />
         <Stack.Screen name="List" component={List} />
         <Stack.Screen name="CreateChangeItem" component={CreateChangeItem} />

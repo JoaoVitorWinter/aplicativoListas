@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import Button from "../Components/Button";
 import Input from "../Components/Input";
+import metadata from '../storage.metadata.json';
 
 export default function CreateChangeScreen({ route, navigation }) {
     const { action, lists, listIndex } = route.params;
@@ -12,6 +15,13 @@ export default function CreateChangeScreen({ route, navigation }) {
         if (name == "") {
             return alert("Coloque um valor no input!")
         }
+
+        saveLists(lists);
+    }
+    
+    const saveLists = async () => {
+        const saveList = (action == "Criar" ? criarLista() : editarLista()) || "";
+        await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
         navigation.navigate("Home", {
             listsChange: action == "Criar" ? criarLista() : editarLista()
         });
