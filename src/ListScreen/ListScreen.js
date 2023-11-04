@@ -12,18 +12,23 @@ export default function ListScreen({ route, navigation }) {
     const { list, listIndex } = route.params;
     const focus = useIsFocused();
     const [useList, setUseList] = useState(["", "", new Array()]);
+    console.log(list)
     useEffect(() => {
         getList();
     }, [focus]);
-
+    
     const removeItem = (index) => {
         var newLists = [...list];
+        var newItemList = [...newLists[listIndex][2]];
         newLists.splice(listIndex, 1);
-        console.log([...useList[2]].splice(index, 1))
-        newLists.unshift([useList[0], (new Date().toLocaleString()), [...useList[2]].splice(index, 1)])
-        console.log(newLists)
+        newItemList.splice(index, 1)
+        newLists.unshift([useList[0], (new Date().toLocaleString()), newItemList]);
         saveLists(newLists);
-        setUseList(newLists[0]);
+        navigation.navigate("List", {
+            list: newLists,
+            listIndex: 0
+        });
+        getList();
     }
 
     const itemsDisplay = useMemo(() => {
@@ -34,7 +39,7 @@ export default function ListScreen({ route, navigation }) {
                         return (
                             <Item
                                 key={"" + item + index}
-                                name={item[0]}
+                                name={item[0] + index}
                                 date={item[1]}
                                 navigation={navigation}
                                 listIndex={listIndex}
@@ -59,7 +64,6 @@ export default function ListScreen({ route, navigation }) {
     const getList = async () => {
         const getList = await AsyncStorage.getItem(metadata.LISTS);
         if (getList) {
-            console.log(JSON.parse(getList)[listIndex])
             setUseList(JSON.parse(getList)[listIndex]);
         }
     }

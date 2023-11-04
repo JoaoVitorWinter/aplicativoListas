@@ -4,12 +4,7 @@ export default function Item(props) {
     return (
         <View>
             <Text>{props.date}</Text>
-            <Pressable style={styles.list} onPress={() => {
-                props.navigation.navigate("List", {
-                    list: props.lists,
-                    listIndex: props.index
-                })
-            }}>
+            <Pressable style={styles.list}>
                 <Text style={styles.name}>{props.name}</Text>
                 <View style={styles.buttons}>
                     <Pressable onPress={() => {
@@ -26,7 +21,7 @@ export default function Item(props) {
                         </Text>
                     </Pressable>
                     <Pressable onPress={() => {
-                        props.removeItem("" + props.index);
+                        props.removeItem(props.index);
                     }}>
                         <Text>
                             X
