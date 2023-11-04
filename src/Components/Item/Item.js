@@ -8,7 +8,7 @@ export default function Item(props) {
                 <Text style={styles.name}>{props.name}</Text>
                 <View style={styles.buttons}>
                     <Pressable onPress={() => {
-                        props.navigation.navigate("CreateChangeList", {
+                        props.navigation.navigate("CreateChangeItem", {
                             action: "Editar",
                             lists: props.lists,
                             listIndex: props.listIndex,

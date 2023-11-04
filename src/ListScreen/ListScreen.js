@@ -39,7 +39,7 @@ export default function ListScreen({ route, navigation }) {
                         return (
                             <Item
                                 key={"" + item + index}
-                                name={item[0] + index}
+                                name={item[0]}
                                 date={item[1]}
                                 navigation={navigation}
                                 listIndex={listIndex}

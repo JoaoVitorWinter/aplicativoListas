@@ -16,7 +16,7 @@ export default function CreateChangeItemScreen({ route, navigation }) {
             return alert("Coloque um valor no input!");
         }
 
-        action == "Criar" ? createItem() : editarItem();
+        action == "Criar" ? createItem() : editeItem();
 
         // navigation.navigate("List", {
         //     list: action == "Criar" ? criarItem() : editarItem(),
@@ -33,6 +33,16 @@ export default function CreateChangeItemScreen({ route, navigation }) {
         saveLists(listsVariable)
     }
 
+    const editeItem = async () => {
+        var listsVariable = lists;
+        var listItems = listsVariable[listIndex][2];
+        listItems.splice(itemIndex, 1)
+        listsVariable.unshift([listsVariable[listIndex][0], (new Date().toLocaleString()), [[name, (new Date().toLocaleString())], ...listItems]])
+        listsVariable.splice(listIndex + 1, 1);
+        listsVariable = [...listsVariable];
+        await saveLists(listsVariable);
+    }
+
     const saveLists = async (lists) => {
         const saveList = lists || "";
         await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
@@ -42,24 +52,6 @@ export default function CreateChangeItemScreen({ route, navigation }) {
             listIndex: 0
         });
     }
-
-    // const criarItem = async () => {
-    //     var listsVariable = lists;
-    //     listsVariable = [[listsVariable[listIndex][0], (new Date().toLocaleString()), [[name, (new Date().toLocaleString())], ...listsVariable[listIndex][2]]], ...listsVariable.splice(listIndex, 1)];
-    //     await saveLists([...listsVariable]);
-    //     console.log
-    //     return listsVariable;
-    // }
-
-    // const editarItem = async () => {
-    //     var listsVariable = lists;
-    //     var listItems = listsVariable[listIndex][2];
-    //     listsVariable.unshift([listsVariable[listIndex][0], (new Date().toLocaleString()), [[name, (new Date().toLocaleString())],...listItems.splice(itemIndex, 1)]])
-    //     listsVariable.splice(listIndex + 1, 1);
-    //     listsVariable = [...listsVariable];
-    //     await saveLists(listsVariable);
-    //     return listsVariable;
-    // }
 
     return (
         <View style={styles.container}>
