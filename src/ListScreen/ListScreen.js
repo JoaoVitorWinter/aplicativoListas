@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,23 +12,23 @@ export default function ListScreen({ route, navigation }) {
     const { list, listIndex } = route.params;
     const focus = useIsFocused();
     const [useList, setUseList] = useState(["", "", new Array()]);
-    console.log(list)
+
     useEffect(() => {
-        getList();
+        getList(listIndex);
     }, [focus]);
-    
-    const removeItem = (index) => {
+
+    const removeItem = async (index) => {
         var newLists = [...list];
         var newItemList = [...newLists[listIndex][2]];
         newLists.splice(listIndex, 1);
         newItemList.splice(index, 1)
         newLists.unshift([useList[0], (new Date().toLocaleString()), newItemList]);
-        saveLists(newLists);
+        await saveLists(newLists);
         navigation.navigate("List", {
             list: newLists,
             listIndex: 0
         });
-        getList();
+        getList(0);
     }
 
     const itemsDisplay = useMemo(() => {
@@ -46,8 +46,8 @@ export default function ListScreen({ route, navigation }) {
                                 index={index}
                                 list={list[listIndex]}
                                 lists={list}
-                                setUseList={setUseList} 
-                                removeItem = {removeItem}
+                                setUseList={setUseList}
+                                removeItem={removeItem}
                             />
                         )
                     })
@@ -61,27 +61,29 @@ export default function ListScreen({ route, navigation }) {
         await AsyncStorage.setItem(metadata.LISTS, JSON.stringify(saveList));
     }
 
-    const getList = async () => {
+    const getList = async (index) => {
         const getList = await AsyncStorage.getItem(metadata.LISTS);
         if (getList) {
-            setUseList(JSON.parse(getList)[listIndex]);
+            setUseList(JSON.parse(getList)[index]);
         }
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{useList[0]}</Text>
-            <Button text={"Adicionar item"} onPress={() => {
-                navigation.navigate("CreateChangeItem", {
-                    action: "Criar",
-                    lists: list,
-                    listIndex: listIndex
-                })
-            }} />
-            {
-                itemsDisplay
-            }
-        </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <Text style={styles.title}>{useList[0]}</Text>
+                <Button text={"Adicionar item"} onPress={() => {
+                    navigation.navigate("CreateChangeItem", {
+                        action: "Criar",
+                        lists: list,
+                        listIndex: listIndex
+                    })
+                }} />
+                {
+                    itemsDisplay
+                }
+            </View>
+        </ScrollView>
     );
 }
 

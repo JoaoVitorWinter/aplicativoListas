@@ -28,9 +28,8 @@ export default function CreateChangeItemScreen({ route, navigation }) {
         var listsVariable = [...lists];
         var listItems = [...lists[listIndex]];
         listsVariable.splice(listIndex, 1);
-        console.log([...listItems[2]])
         listItems[2].length > 0 ? listsVariable.unshift([listItems[0], (new Date().toLocaleString()), [[name ,(new Date().toLocaleString())], ...listItems[2]]]) : listsVariable.unshift([listItems[0], (new Date().toLocaleString()), [[name ,(new Date().toLocaleString())]]]);
-        saveLists(listsVariable)
+        saveLists(listsVariable);
     }
 
     const editeItem = async () => {

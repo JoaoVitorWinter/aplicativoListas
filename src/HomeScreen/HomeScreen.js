@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,6 +11,7 @@ import metadata from '../storage.metadata.json';
 export default function HomeScreen({ route, navigation }) {
     const focus = useIsFocused();
     const [lists, setLists] = useState(new Array());
+
     useEffect(() => {
         getLists();
     }, [focus]);
@@ -54,27 +55,30 @@ export default function HomeScreen({ route, navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Ultimate List</Text>
-            <Button
-                onPress={() => {
-                    navigation.navigate("CreateChangeList", {
-                        action: "Criar",
-                        lists: lists,
-                    });
-                }}
-                text={"Adicionar lista"} />
-            {
-                listsDisplay
-            }
-        </View>
+        <ScrollView>
+            <View style={styles.container}>
+
+                <Text style={styles.title}>Ultimate List</Text>
+                <Button
+                    onPress={() => {
+                        navigation.navigate("CreateChangeList", {
+                            action: "Criar",
+                            lists: lists,
+                        });
+                    }}
+                    text={"Adicionar lista"} />
+                {
+                    listsDisplay
+                }
+            </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         gap: 16,
-        marginTop: 24
+        marginVertical: 24
     },
     title: {
         fontSize: 30,
