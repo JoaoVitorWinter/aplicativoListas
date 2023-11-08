@@ -90,7 +90,7 @@ export default function ListScreen({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         gap: 16,
-        marginTop: 24
+        marginVertical: 24
     },
     title: {
         fontSize: 30,
