@@ -1,5 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
+import { Icon } from '@rneui/themed';
+
 export default function List(props) {
     const removeList = (index) => {
         var newLists = [...props.lists];
@@ -25,16 +27,12 @@ export default function List(props) {
                             listIndex: props.index
                         })
                     }}>
-                        <Text>
-                            Editar
-                        </Text>
+                        <Icon name="edit" />
                     </Pressable>
                     <Pressable onPress={() => {
                         removeList(props.index);
                     }}>
-                        <Text>
-                            X
-                        </Text>
+                        <Icon name="delete" />
                     </Pressable>
                 </View>
             </Pressable>

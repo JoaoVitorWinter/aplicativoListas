@@ -1,5 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
+import { Icon } from '@rneui/themed';
+
 export default function Item(props) {
     return (
         <View>
@@ -16,16 +18,12 @@ export default function Item(props) {
 
                         })
                     }}>
-                        <Text>
-                            Editar
-                        </Text>
+                        <Icon name="edit" />
                     </Pressable>
                     <Pressable onPress={() => {
                         props.removeItem(props.index);
                     }}>
-                        <Text>
-                            X
-                        </Text>
+                        <Icon name="delete" />
                     </Pressable>
                 </View>
             </Pressable>
