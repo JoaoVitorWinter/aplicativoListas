@@ -1,3 +1,5 @@
 [ ] Botão de inversão de ordem
 [X] Colocar ícones para os botões
 [ ] Arrumar o header
+[ ] Arrumar as cores
+[ ] Arrumar a posição da data
