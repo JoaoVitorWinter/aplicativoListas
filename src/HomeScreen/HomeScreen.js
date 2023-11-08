@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Icon } from '@rneui/themed';
 
 import Button from '../Components/Button'
 import List from "../Components/List";
