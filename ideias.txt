@@ -3,4 +3,3 @@
 [ ] Arrumar o header
 [X] Arrumar as cores
 [X] Arrumar a posição da data
-[ ] Marcar como feito os itens

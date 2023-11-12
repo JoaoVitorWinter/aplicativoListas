@@ -11,11 +11,18 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home}/>
-        <Stack.Screen name="CreateChangeList" component={CreateChangeList} />
-        <Stack.Screen name="List" component={List} />
-        <Stack.Screen name="CreateChangeItem" component={CreateChangeItem} />
+      <Stack.Navigator screenOptions={{
+        headerStyle: {
+          backgroundColor: "#BEB7A4"
+        },
+        headerTintColor: "#191716"
+      }}>
+        <Stack.Screen name="Home" component={Home} options={{
+          title: "Home"
+          }} />
+        <Stack.Screen name="CreateChangeList" component={CreateChangeList} options={{title: "Editor de listas"}} />
+        <Stack.Screen name="List" component={List} options={{title: "Lista"}} />
+        <Stack.Screen name="CreateChangeItem" component={CreateChangeItem} options={{title: "Editor de itens"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
