@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Pressable } from 'react-native';
 
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,6 +12,7 @@ export default function ListScreen({ route, navigation }) {
     const { list, listIndex } = route.params;
     const focus = useIsFocused();
     const [useList, setUseList] = useState(["", "", new Array()]);
+    const [order, setOrder] = useState("column");
 
     useEffect(() => {
         getList(listIndex);
@@ -33,7 +34,7 @@ export default function ListScreen({ route, navigation }) {
 
     const itemsDisplay = useMemo(() => {
         return (
-            <View style={{ width: "100%", alignItems: "center", gap: 8 }}>
+            <View style={{ width: "100%", alignItems: "center", gap: 8, flexDirection: order }}>
                 {
                     useList[2].map((item, index) => {
                         return (
@@ -54,7 +55,7 @@ export default function ListScreen({ route, navigation }) {
                 }
             </View>
         )
-    }, [useList]);
+    }, [useList, order]);
 
     const saveLists = async (lists) => {
         const saveList = lists || "";
@@ -68,6 +69,10 @@ export default function ListScreen({ route, navigation }) {
         }
     }
 
+    const reverseOrder = () => {
+        order == "column" ? setOrder("column-reverse") : setOrder("column");
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -79,6 +84,9 @@ export default function ListScreen({ route, navigation }) {
                         listIndex: listIndex
                     })
                 }} />
+                <Pressable onPress={reverseOrder} style={styles.inverter}>
+                    <Text style={styles.text}>Inverter ordem</Text>
+                </Pressable>
                 {
                     itemsDisplay
                 }
@@ -97,5 +105,16 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         textAlign: "center"
+    },
+    inverter: {
+        marginHorizontal: 24,
+        width: "fit-content",
+        backgroundColor: "#3D348B",
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 8
+    },
+    text: {
+        color: "#E0E2DB"
     }
 });
