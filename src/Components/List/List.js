@@ -11,7 +11,7 @@ export default function List(props) {
 
     return (
         <View>
-            <Text>{props.date}</Text>
+            <Text style={styles.date}>{props.date}</Text>
             <Pressable style={styles.list} onPress={() => {
                 props.navigation.navigate("List", {
                     list: props.lists,
@@ -58,5 +58,14 @@ const styles = StyleSheet.create({
     buttons: {
         flexDirection: "row",
         gap: 10
+    },
+    date: {
+        backgroundColor: "#3D348B",
+        color: "#E0E2DB",
+        width: "fit-content",
+        paddingHorizontal: 8,
+        paddingVertical: 2,
+        borderRadius: 8,
+        marginBottom: 2
     }
 });

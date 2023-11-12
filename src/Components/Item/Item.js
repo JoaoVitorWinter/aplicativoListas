@@ -5,7 +5,7 @@ import { Icon } from '@rneui/themed';
 export default function Item(props) {
     return (
         <View>
-            <Text>{props.date}</Text>
+            <Text style={styles.date}>{props.date}</Text>
             <Pressable style={styles.item}>
                 <Text style={styles.name}>{props.name}</Text>
                 <View style={styles.buttons}>
@@ -49,5 +49,14 @@ const styles = StyleSheet.create({
     buttons: {
         flexDirection: "row",
         gap: 10
+    },
+    date: {
+        backgroundColor: "#3D348B",
+        color: "#E0E2DB",
+        width: "fit-content",
+        paddingHorizontal: 8,
+        paddingVertical: 2,
+        borderRadius: 8,
+        marginBottom: 2
     }
 });
