@@ -62,7 +62,9 @@ export default function CreateChangeItemScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: "#DED7C4",
         gap: 16,
-        marginTop: 24
+        paddingVertical: 24,
+        minHeight: "100vh" 
     }
 });

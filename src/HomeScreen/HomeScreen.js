@@ -78,8 +78,10 @@ export default function HomeScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: "#DED7C4",
         gap: 16,
-        marginVertical: 24
+        paddingVertical: 24,
+        minHeight: "100vh" 
     },
     title: {
         fontSize: 30,

@@ -27,12 +27,12 @@ export default function List(props) {
                             listIndex: props.index
                         })
                     }}>
-                        <Icon name="edit" />
+                        <Icon name="edit" color={"#E0E2DB"}/>
                     </Pressable>
                     <Pressable onPress={() => {
                         removeList(props.index);
                     }}>
-                        <Icon name="delete" />
+                        <Icon name="delete" color={"#E0E2DB"}/>
                     </Pressable>
                 </View>
             </Pressable>
@@ -42,19 +42,18 @@ export default function List(props) {
 
 const styles = StyleSheet.create({
     list: {
-        backgroundColor: "aqua",
+        backgroundColor: "#3D348B",
         flexDirection: "row",
-        // flexWrap: "wrap",
         width: 350,
         justifyContent: "space-between",
         alignItems: "center",
-        borderColor: "black",
-        borderWidth: 1,
         borderRadius: 8,
-        padding: 8,
+        padding: 8
     },
     name: {
-        maxWidth: "70%"
+        fontSize: 16,
+        maxWidth: "70%",
+        color: "#E0E2DB"
     },
     buttons: {
         flexDirection: "row",
