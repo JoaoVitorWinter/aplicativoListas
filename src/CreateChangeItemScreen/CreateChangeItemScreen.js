@@ -12,7 +12,7 @@ export default function CreateChangeItemScreen({ route, navigation }) {
     const [name, setName] = useState("");
     
     const handleClick = () => {
-        if (name == "") {
+        if (name.trim() == "") {
             return alert("Coloque um valor no input!");
         }
 
