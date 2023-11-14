@@ -61,7 +61,7 @@ export default function HomeScreen({ route, navigation }) {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={{ height: "100%", backgroundColor: "#DED7C4" }}>
             <View style={styles.container}>
                 <Text style={styles.title}>Ultimate List</Text>
                 <Button
@@ -72,9 +72,11 @@ export default function HomeScreen({ route, navigation }) {
                         });
                     }}
                     text={"Adicionar lista"} />
-                <Pressable onPress={reverseOrder} style={styles.inverter}>
-                    <Text style={styles.text}>Inverter ordem</Text>
-                </Pressable>
+                <View style={styles.modifiers}>
+                    <Pressable onPress={reverseOrder} style={styles.inverter}>
+                        <Text style={styles.text}>Inverter ordem</Text>
+                    </Pressable>
+                </View>
                 {
                     listsDisplay
                 }
@@ -85,25 +87,29 @@ export default function HomeScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#DED7C4",
         gap: 16,
-        paddingVertical: 24,
-        minHeight: "100vh" 
+        paddingVertical: 24
     },
     title: {
         fontSize: 30,
+        fontWeight: "500",
         textAlign: "center"
     },
+    modifiers: {
+        width: "100%",
+        alignItems: "center"
+    },
     inverter: {
-        marginHorizontal: 24,
-        width: "fit-content",
+        width: 125,
         backgroundColor: "#3D348B",
         paddingHorizontal: 8,
         paddingVertical: 4,
-        borderRadius: 8
     },
     text: {
         color: "#E0E2DB",
+        textAlign: "center",
+        fontSize: 16,
+        fontWeight: "500"
     }
 
 });

@@ -6,7 +6,7 @@ export default function Input(props) {
         <TextInput 
         style={styles.input}
         placeholder={props.placeholder}
-        onChangeText={props.onChangeText} />
+        onChangeText={props.onChangeText} placeholderTextColor={"#191716"} />
     );
 }
 
@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         paddingLeft: 20,
         borderColor: "#191716",
-        borderWidth: 1,
-        borderRadius: 8,
+        borderWidth: 2
     }
 });

@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#DED7C4",
         gap: 16,
         paddingVertical: 24,
-        minHeight: "100vh" 
+        minHeight: "100%" 
     }
 });

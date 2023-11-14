@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
         width: 350,
         justifyContent: "space-between",
         alignItems: "center",
-        borderRadius: 8,
         padding: 8
     },
     name: {
         fontSize: 16,
+        fontWeight: "500",
         maxWidth: "70%",
         color: "#E0E2DB"
     },
@@ -53,10 +53,12 @@ const styles = StyleSheet.create({
     date: {
         backgroundColor: "#3D348B",
         color: "#E0E2DB",
-        width: "fit-content",
+        width: 225,
+        textAlign: "center",
         paddingHorizontal: 8,
         paddingVertical: 2,
-        borderRadius: 8,
-        marginBottom: 2
+        marginBottom: 4,
+        fontSize: 16,
+        fontWeight: "500"
     }
 });
